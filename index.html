@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profesyonel CV & Portfolyo</title>
+    <style>
+        /* Modern ve Göz Yormayan Renk Değişkenleri */
+        :root {
+            --bg-color: #f1f5f9;
+            --container-bg: rgba(255, 255, 255, 0.8);
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --primary: #3b82f6;
+            --accent: #6366f1;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Göz dostu Karanlık Mod Renkleri */
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --container-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #60a5fa;
+            --accent: #818cf8;
+            --card-bg: #1e293b;
+            --border: #334155;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--container-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Üst Menü ve Tema Butonu */
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Profil Bölümü */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--primary);
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        header h1 { font-size: 2.5rem; margin-bottom: 5px; }
+        header p { color: var(--text-muted); font-size: 1.1rem; }
+
+        /* Yetenekler Bölümü */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Arama Kutusu */
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-main);
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        /* Proje Kartları */
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .repo-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .repo-title {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .repo-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .repo-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* Animasyonlar */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .main-container { padding: 20px; }
+            header h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <nav>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 Mod Değiştir</button>
+        </nav>
+
+        <header id="profile-header">
+            <h1>Yükleniyor...</h1>
+        </header>
+
+        <div class="skills-container">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">UI Design</span>
+        </div>
+
+        <hr style="margin: 40px 0; border: 0; border-top: 1px solid var(--border);">
+
+        <section>
+            <h2 style="margin-bottom: 20px;">GitHub Projelerim</h2>
+            <input type="text" id="searchInput" class="search-box" placeholder="Proje ismine göre ara..." onkeyup="filterRepos()">
+            
+            <div id="repo-grid" class="repo-grid">
+                </div>
+        </section>
+
+        <footer style="margin-top: 50px; text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+            <p>© 2026 - Tüm Hakları Saklıdır. | <a href="mailto:email@adresin.com" style="color: var(--primary);">Bana Ulaşın</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // --- AYARLAR ---
+        const GITHUB_USERNAME = 'nikhdav'; // BURAYA KENDİ KULLANICI ADINI YAZ
+        let allRepos = [];
+
+        // --- TEMA YÖNETİMİ ---
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', targetTheme);
+            localStorage.setItem('theme', targetTheme);
+        }
+
+        // Kayıtlı temayı yükle
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        // --- GITHUB VERİ ÇEKME ---
+        async function init() {
+            try {
+                // 1. Profil Bilgilerini Çek
+                const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+                const userData = await userRes.json();
+                
+                document.getElementById('profile-header').innerHTML = `
+                    <img src="${userData.avatar_url}" class="profile-img" alt="Profil">
+                    <h1>${userData.name || GITHUB_USERNAME}</h1>
+                    <p>${userData.bio || 'Student & Developer'}</p>
+                    <p style="font-size: 0.9rem; margin-top:5px;">📍 ${userData.location || 'Dünya'} | 💻 ${userData.public_repos} Repo</p>
+                `;
+
+                // 2. Repoları Çek
+                const repoRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
+                allRepos = await repoRes.json();
+                
+                renderRepos(allRepos);
+            } catch (error) {
+                console.error("Hata:", error);
+                document.getElementById('profile-header').innerHTML = "<h1>Veriler yüklenemedi.</h1>";
+            }
+        }
+
+        function renderRepos(repos) {
+            const grid = document.getElementById('repo-grid');
+            grid.innerHTML = '';
+            
+            repos.filter(r => !r.fork).forEach((repo, index) => {
+                const card = document.createElement('a');
+                card.href = repo.html_url;
+                card.target = "_blank";
+                card.className = 'repo-card';
+                card.style.animation = `fadeIn 0.5s ease-out ${index * 0.05}s both`;
+
+                card.innerHTML = `
+                    <div>
+                        <div class="repo-title">${repo.name}</div>
+                        <div class="repo-desc">${repo.description || 'Açıklama bulunmuyor.'}</div>
+                    </div>
+                    <div class="repo-footer">
+                        <span>● ${repo.language || 'Kod'}</span>
+                        <span>⭐ ${repo.stargazers_count}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // --- FİLTRELEME ---
+        function filterRepos() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allRepos.filter(repo => 
+                repo.name.toLowerCase().includes(term) || 
+                (repo.description && repo.description.toLowerCase().includes(term))
+            );
+            renderRepos(filtered);
+        }
+
+        init();
+    </script>
+</body>
+</html>
