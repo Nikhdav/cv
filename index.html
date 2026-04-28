@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesyonel CV & Portfolyo</title>
     <style>
-        /* Modern ve Göz Yormayan Renk Değişkenleri */
+        /* Mevcut Renk Değişkenlerin - Dokunulmadı */
         :root {
             --bg-color: #f1f5f9;
             --container-bg: rgba(255, 255, 255, 0.8);
@@ -18,7 +18,6 @@
             --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
-        /* Göz dostu Karanlık Mod Renkleri */
         [data-theme="dark"] {
             --bg-color: #0f172a;
             --container-bg: rgba(30, 41, 59, 0.7);
@@ -29,6 +28,16 @@
             --card-bg: #1e293b;
             --border: #334155;
             --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 2. ÖZELLİK: Arka Plan Aura Efekti (Sabit ve Hafif) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         * {
@@ -58,9 +67,9 @@
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
             animation: fadeIn 0.8s ease-out;
+            position: relative;
         }
 
-        /* Üst Menü ve Tema Butonu */
         nav {
             display: flex;
             justify-content: flex-end;
@@ -78,7 +87,6 @@
             font-size: 14px;
         }
 
-        /* Profil Bölümü */
         header {
             text-align: center;
             margin-bottom: 50px;
@@ -96,7 +104,6 @@
         header h1 { font-size: 2.5rem; margin-bottom: 5px; }
         header p { color: var(--text-muted); font-size: 1.1rem; }
 
-        /* Yetenekler Bölümü */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
@@ -114,7 +121,6 @@
             font-weight: 500;
         }
 
-        /* Arama Kutusu */
         .search-box {
             width: 100%;
             padding: 12px 20px;
@@ -126,7 +132,6 @@
             font-size: 1rem;
         }
 
-        /* Proje Kartları */
         .repo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -136,19 +141,21 @@
         .repo-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            padding: 20px;
+            padding: 25px; /* Biraz daha genişletildi */
             border-radius: 16px;
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s, border-color 0.3s;
+            /* 3. ÖZELLİK: Geliştirilmiş Hover Geçişi */
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s, box-shadow 0.3s;
         }
 
         .repo-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--primary);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
         .repo-title {
@@ -170,9 +177,50 @@
             font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+        }
+.skill-tag {
+            background: var(--primary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .skill-tag:hover {
+            transform: scale(1.05);
+            background: var(--accent);
         }
 
-        /* Animasyonlar */
+
+
+        /* 4. ÖZELLİK: Mevcut Tasarıma Uygun İletişim Bölümü */
+        .contact-footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .contact-btn {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+        .contact-btn:hover { opacity: 0.7; }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -209,21 +257,22 @@
             <h2 style="margin-bottom: 20px;">GitHub Projelerim</h2>
             <input type="text" id="searchInput" class="search-box" placeholder="Proje ismine göre ara..." onkeyup="filterRepos()">
             
-            <div id="repo-grid" class="repo-grid">
-                </div>
+            <div id="repo-grid" class="repo-grid"></div>
         </section>
 
-        <footer style="margin-top: 50px; text-align: center; font-size: 0.8rem; color: var(--text-muted);">
-            <p>© 2026 - Tüm Hakları Saklıdır. | <a href="mailto:email@adresin.com" style="color: var(--primary);">Bana Ulaşın</a></p>
+        <footer class="contact-footer">
+            <p style="color: var(--text-muted); font-size: 0.85rem;">© 2026 - Berke Değerli.</p>
+            <div class="contact-links">
+                <a href="mailto:berkedegerli98@gmail.com" class="contact-btn">E-posta Yaz</a>
+                <a href="#" id="github-footer-link" class="contact-btn" target="_blank">GitHub Profilim</a>
+            </div>
         </footer>
     </div>
 
     <script>
-        // --- AYARLAR ---
-        const GITHUB_USERNAME = 'nikhdav'; // BURAYA KENDİ KULLANICI ADINI YAZ
+        const GITHUB_USERNAME = 'nikhdav'; 
         let allRepos = [];
 
-        // --- TEMA YÖNETİMİ ---
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -231,11 +280,9 @@
             localStorage.setItem('theme', targetTheme);
         }
 
-        // Kayıtlı temayı yükle
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
 
-        // --- GITHUB VERİ ÇEKME ---
         async function init() {
             try {
                 // 1. Profil Bilgilerini Çek
@@ -245,14 +292,38 @@
                 document.getElementById('profile-header').innerHTML = `
                     <img src="${userData.avatar_url}" class="profile-img" alt="Profil">
                     <h1>${userData.name || GITHUB_USERNAME}</h1>
-                    <p>${userData.bio || 'Student & Developer'}</p>
+                    <p>${userData.bio || 'Web Geliştirici & Tasarımcı'}</p>
                     <p style="font-size: 0.9rem; margin-top:5px;">📍 ${userData.location || 'Dünya'} | 💻 ${userData.public_repos} Repo</p>
                 `;
+                
+                document.getElementById('github-footer-link').href = userData.html_url;
 
                 // 2. Repoları Çek
                 const repoRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
                 allRepos = await repoRes.json();
                 
+                // --- DİNAMİK YETENEK ANALİZİ (3. Özellik) ---
+                const langCounts = {};
+                allRepos.forEach(repo => {
+                    if (repo.language) {
+                        langCounts[repo.language] = (langCounts[repo.language] || 0) + 1;
+                    }
+                });
+
+                // En çok kullanılan 5 dili sırala ve ekrana bas
+                const skillsContainer = document.querySelector('.skills-container');
+                skillsContainer.innerHTML = ''; // Statik olanları temizle
+                
+                Object.entries(langCounts)
+                    .sort((a, b) => b[1] - a[1]) // En çok kullanılandan aza
+                    .slice(0, 5) // İlk 5 dili al
+                    .forEach(([lang, count]) => {
+                        const span = document.createElement('span');
+                        span.className = 'skill-tag';
+                        span.innerText = `${lang} (${count})`;
+                        skillsContainer.appendChild(span);
+                    });
+
                 renderRepos(allRepos);
             } catch (error) {
                 console.error("Hata:", error);
@@ -285,7 +356,6 @@
             });
         }
 
-        // --- FİLTRELEME ---
         function filterRepos() {
             const term = document.getElementById('searchInput').value.toLowerCase();
             const filtered = allRepos.filter(repo => 
